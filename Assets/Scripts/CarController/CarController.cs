@@ -18,6 +18,13 @@ public class CarController : MonoBehaviour
 
     public WheelCollider frontRightW, frontLeftW, backRightW, backLeftW;
     public Transform frontRightT, frontLeftT, backRightT, backLeftT;
+
+    [Header("Car Parts")]
+    public CarBody body;
+    public CarEngine engine;
+    public CarTire tire;
+    public CarAero aero;
+
     [Header ("Handling")]
     [Range(30, 60)]
     public float maxSteerAngle = 30;
@@ -28,6 +35,8 @@ public class CarController : MonoBehaviour
     public float brakeMod = 1;
     [Header ("Max Speed")]
     public float maxVelocity = 25;
+    [Header("Max Reverse Speed")]
+    public float maxReverseSpeed = 5;
     [Header("Boost Speed")]
     public float boostSpeed = 10;
     [Header("Boost Charge Rate")]
@@ -38,6 +47,16 @@ public class CarController : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        Setup();
+    }
+
+    public void Setup()
+    {
+        rb.mass = body.mass + engine.mass + tire.mass + aero.mass;
+        maxVelocity = body.topSpeedBase + engine.topSpeedModifier + aero.topSpeedModifier;
+        maxMotorTorque = body.accelerationBase + engine.accelerationModifier + tire.accelerationModifier;
+        maxSteerAngle = body.handlingBase + engine.handlingModifer + tire.handlingModifer + aero.handlingModifier;
+        brakeMod = body.brakingBase + engine.brakingModifer + tire.brakingModifer + aero.brakingModifier;
     }
 
     public void GetInput()
@@ -87,15 +106,34 @@ public class CarController : MonoBehaviour
         }
         else if (verticalInput < 0)
         {
-            frontLeftW.motorTorque = 0;
-            frontRightW.motorTorque = 0;
-            frontLeftW.brakeTorque = verticalInput * -maxBrakeTorque;
-            frontRightW.brakeTorque = verticalInput * -maxBrakeTorque;
-            
-            if (rb.velocity.magnitude > maxVelocity * 0.05f)
+            Vector3 localVelocity = transform.InverseTransformDirection(rb.velocity);
+            if (localVelocity.z > 0)
             {
-                rb.AddForce(-transform.forward * brakeMod * 1000);
-                boostCharge += boostChargeRate * Time.deltaTime;
+                frontLeftW.motorTorque = 0;
+                frontRightW.motorTorque = 0;
+                frontLeftW.brakeTorque = verticalInput * -maxBrakeTorque;
+                frontRightW.brakeTorque = verticalInput * -maxBrakeTorque;
+
+                if (rb.velocity.magnitude > maxVelocity * 0.05f)
+                {
+                    rb.AddForce(-transform.forward * brakeMod * 1000);
+                    boostCharge += boostChargeRate * Time.deltaTime;
+                }
+            }
+            else
+            {
+                frontLeftW.brakeTorque = 0;
+                frontRightW.brakeTorque = 0;
+                if (rb.velocity.magnitude < maxReverseSpeed)
+                {
+                    frontLeftW.motorTorque = -maxMotorTorque;
+                    frontRightW.motorTorque = -maxMotorTorque;
+                }
+                else
+                {
+                    frontLeftW.motorTorque = 0;
+                    frontRightW.motorTorque = 0;
+                }
             }
         }
         else
