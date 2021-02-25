@@ -44,6 +44,9 @@ public class CarController : MonoBehaviour
     [Header("Boost Drain Rate")]
     public float boostDrainRate = 5;
 
+    [Space]
+    public bool rearWheelDrive = true;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -87,21 +90,33 @@ public class CarController : MonoBehaviour
         }
     }
 
-    private void Accelerate()
+    private void Accelerate(bool rearWheelDrive)
+    {
+        if (rearWheelDrive)
+        {
+            Accelerate(backLeftW, backRightW);
+        }
+        else
+        {
+            Accelerate(frontLeftW, frontRightW);
+        }
+    }
+
+    private void Accelerate(WheelCollider leftW, WheelCollider rightW)
     {
         if (verticalInput > 0)
         {
-            frontLeftW.brakeTorque = 0;
-            frontRightW.brakeTorque = 0;
+            leftW.brakeTorque = 0;
+            rightW.brakeTorque = 0;
             if (rb.velocity.magnitude < maxVelocity)
             {
-                frontLeftW.motorTorque = verticalInput * maxMotorTorque;
-                frontRightW.motorTorque = verticalInput * maxMotorTorque;
+                leftW.motorTorque = verticalInput * maxMotorTorque;
+                rightW.motorTorque = verticalInput * maxMotorTorque;
             }
             else
             {
-                frontLeftW.motorTorque = 0;
-                frontRightW.motorTorque = 0;
+                leftW.motorTorque = 0;
+                rightW.motorTorque = 0;
             }
         }
         else if (verticalInput < 0)
@@ -109,10 +124,10 @@ public class CarController : MonoBehaviour
             Vector3 localVelocity = transform.InverseTransformDirection(rb.velocity);
             if (localVelocity.z > 0)
             {
-                frontLeftW.motorTorque = 0;
-                frontRightW.motorTorque = 0;
-                frontLeftW.brakeTorque = verticalInput * -maxBrakeTorque;
-                frontRightW.brakeTorque = verticalInput * -maxBrakeTorque;
+                leftW.motorTorque = 0;
+                rightW.motorTorque = 0;
+                leftW.brakeTorque = verticalInput * -maxBrakeTorque;
+                rightW.brakeTorque = verticalInput * -maxBrakeTorque;
 
                 if (rb.velocity.magnitude > maxVelocity * 0.05f)
                 {
@@ -122,26 +137,26 @@ public class CarController : MonoBehaviour
             }
             else
             {
-                frontLeftW.brakeTorque = 0;
-                frontRightW.brakeTorque = 0;
+                leftW.brakeTorque = 0;
+                rightW.brakeTorque = 0;
                 if (rb.velocity.magnitude < maxReverseSpeed)
                 {
-                    frontLeftW.motorTorque = -maxMotorTorque;
-                    frontRightW.motorTorque = -maxMotorTorque;
+                    leftW.motorTorque = -maxMotorTorque;
+                    rightW.motorTorque = -maxMotorTorque;
                 }
                 else
                 {
-                    frontLeftW.motorTorque = 0;
-                    frontRightW.motorTorque = 0;
+                    leftW.motorTorque = 0;
+                    rightW.motorTorque = 0;
                 }
             }
         }
         else
         {
-            frontLeftW.motorTorque = 0;
-            frontRightW.motorTorque = 0;
-            frontLeftW.brakeTorque = 0;
-            frontRightW.brakeTorque = 0;
+            leftW.motorTorque = 0;
+            rightW.motorTorque = 0;
+            leftW.brakeTorque = 0;
+            rightW.brakeTorque = 0;
         }
     }
 
@@ -219,7 +234,7 @@ public class CarController : MonoBehaviour
     {
         GetInput();
         Steer();
-        Accelerate();
+        Accelerate(rearWheelDrive);
         Boost();
         SteeringHelper();
         StabilizeWheels();
