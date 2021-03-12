@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Test Car Body
   m_EditorClassIdentifier: 
   mass: 200
-  topSpeedBase: 20
-  accelerationBase: 300
-  handlingBase: 45
-  brakingBase: 3
+  topSpeedBase: 500
+  accelerationBase: 1500
+  handlingBase: 50
+  brakingBase: 20
   model: {fileID: 0}
