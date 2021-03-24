@@ -12,7 +12,7 @@ public class CarController : MonoBehaviour
     [HideInInspector] public float boostCharge = 0;
     
     private float horizontalInput;
-    private float verticalInput;
+    private float throttleInput;
     private bool boostInput;
     private float steeringAngle;
 
@@ -65,8 +65,8 @@ public class CarController : MonoBehaviour
     public void GetInput()
     {
         horizontalInput = Input.GetAxis("Horizontal");
-        verticalInput = Input.GetAxis("Vertical");
-        boostInput = Input.GetKey(KeyCode.Space);
+        throttleInput = Input.GetAxis("Throttle");
+        boostInput = Input.GetButton("Boost");
     }
 
     private void Steer()
@@ -104,14 +104,14 @@ public class CarController : MonoBehaviour
 
     private void Accelerate(WheelCollider leftW, WheelCollider rightW)
     {
-        if (verticalInput > 0)
+        if (throttleInput > 0)
         {
             leftW.brakeTorque = 0;
             rightW.brakeTorque = 0;
             if (rb.velocity.magnitude < maxVelocity)
             {
-                leftW.motorTorque = verticalInput * maxMotorTorque;
-                rightW.motorTorque = verticalInput * maxMotorTorque;
+                leftW.motorTorque = throttleInput * maxMotorTorque;
+                rightW.motorTorque = throttleInput * maxMotorTorque;
             }
             else
             {
@@ -119,15 +119,15 @@ public class CarController : MonoBehaviour
                 rightW.motorTorque = 0;
             }
         }
-        else if (verticalInput < 0)
+        else if (throttleInput < 0)
         {
             Vector3 localVelocity = transform.InverseTransformDirection(rb.velocity);
             if (localVelocity.z > 0)
             {
                 leftW.motorTorque = 0;
                 rightW.motorTorque = 0;
-                leftW.brakeTorque = verticalInput * -maxBrakeTorque;
-                rightW.brakeTorque = verticalInput * -maxBrakeTorque;
+                leftW.brakeTorque = throttleInput * -maxBrakeTorque;
+                rightW.brakeTorque = throttleInput * -maxBrakeTorque;
 
                 if (rb.velocity.magnitude > maxVelocity * 0.05f)
                 {
