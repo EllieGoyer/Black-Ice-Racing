@@ -1946,7 +1946,7 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 0.75
-    m_Stiffness: 1
+    m_Stiffness: 1.2
   m_Enabled: 1
 --- !u!43 &1246839874
 Mesh:
@@ -2865,7 +2865,7 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 0.75
-    m_Stiffness: 1
+    m_Stiffness: 1.2
   m_Enabled: 1
 --- !u!1 &1642728971
 GameObject:
@@ -3515,7 +3515,7 @@ MonoBehaviour:
   brakeMod: 5
   maxVelocity: 250
   maxReverseSpeed: 5
-  boostSpeed: 300
+  boostSpeed: 250
   boostChargeRate: 10
   boostDrainRate: 10
   rearWheelDrive: 1
