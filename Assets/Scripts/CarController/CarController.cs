@@ -72,8 +72,8 @@ public class CarController : MonoBehaviour
     public void GetInput()
     {
         horizontalInput = Input.GetAxis("Horizontal");
-        verticalInput = Input.GetAxis("Vertical");
-        boostInput = Input.GetKey(KeyCode.Space);
+        throttleInput = Input.GetAxis("Throttle");
+        boostInput = Input.GetButton("Boost");
     }
 
     private void Steer()
@@ -111,7 +111,7 @@ public class CarController : MonoBehaviour
 
     private void Move(WheelCollider leftW, WheelCollider rightW)
     {
-        if (verticalInput > 0)
+        if (throttleInput > 0)
         {
             Accelerate(leftW, rightW);
         }

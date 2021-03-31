@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b85e69678c09b34980078c1cd30d3d7, type: 3}
   m_Name: Test Engine
   m_EditorClassIdentifier: 
-  mass: 50
+  mass: 30
   topSpeedModifier: 5
   accelerationModifier: 100
   handlingModifer: -10
