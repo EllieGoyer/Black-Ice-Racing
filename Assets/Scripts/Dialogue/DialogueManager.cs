@@ -50,9 +50,9 @@ public class DialogueManager : MonoBehaviour
         _sentences = new Queue<DialogueInfo.Sentence>();
     }
 
-    public void OnClick()
+    public void Update()
     {
-        if (!_waitingForChoice && _isActive)
+        if (!_waitingForChoice && _isActive && Input.GetMouseButtonDown(0))
         {
             DisplayNextSentence();
         }
