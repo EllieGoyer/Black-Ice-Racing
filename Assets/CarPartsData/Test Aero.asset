@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00df323e5100fb940bb28fc8d1ede3d8, type: 3}
   m_Name: Test Aero
   m_EditorClassIdentifier: 
-  mass: 10
+  mass: 5
   topSpeedModifier: -5
   handlingModifier: 5
   brakingModifier: 1

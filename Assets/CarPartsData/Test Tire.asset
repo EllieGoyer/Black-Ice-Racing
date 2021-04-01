@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7a246f8ebe906846ab78f15d498f244, type: 3}
   m_Name: Test Tire
   m_EditorClassIdentifier: 
-  mass: 40
+  mass: 5
   accelerationModifier: 20
   handlingModifer: 5
   brakingModifer: 2

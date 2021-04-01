@@ -12,9 +12,11 @@ public class CarController : MonoBehaviour
     [HideInInspector] public float boostCharge = 0;
     
     private float horizontalInput;
-    private float verticalInput;
-    private bool boostInput;
+    [HideInInspector] public float throttleInput;
+    [HideInInspector] public bool boostInput;
     private float steeringAngle;
+
+    private bool AIEnabled = false;
 
     public WheelCollider frontRightW, frontLeftW, backRightW, backLeftW;
     public Transform frontRightT, frontLeftT, backRightT, backLeftT;
@@ -25,6 +27,8 @@ public class CarController : MonoBehaviour
     public CarTire tire;
     public CarAero aero;
 
+    [Header("Downward Force Modifier")]
+    public float downwardForce = 100f;
     [Header ("Handling")]
     [Range(30, 60)]
     public float maxSteerAngle = 30;
@@ -50,6 +54,11 @@ public class CarController : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        CarAI ai = GetComponent<CarAI>();
+        if (ai != null)
+        {
+            AIEnabled = true;
+        }
         Setup();
     }
 
@@ -65,8 +74,8 @@ public class CarController : MonoBehaviour
     public void GetInput()
     {
         horizontalInput = Input.GetAxis("Horizontal");
-        verticalInput = Input.GetAxis("Vertical");
-        boostInput = Input.GetKey(KeyCode.Space);
+        throttleInput = Input.GetAxis("Throttle");
+        boostInput = Input.GetButton("Boost");
     }
 
     private void Steer()
@@ -90,66 +99,27 @@ public class CarController : MonoBehaviour
         }
     }
 
-    private void Accelerate(bool rearWheelDrive)
+    private void Move(bool rearWheelDrive)
     {
         if (rearWheelDrive)
         {
-            Accelerate(backLeftW, backRightW);
+            Move(backLeftW, backRightW);
         }
         else
         {
-            Accelerate(frontLeftW, frontRightW);
+            Move(frontLeftW, frontRightW);
         }
     }
 
-    private void Accelerate(WheelCollider leftW, WheelCollider rightW)
+    private void Move(WheelCollider leftW, WheelCollider rightW)
     {
-        if (verticalInput > 0)
+        if (throttleInput > 0)
         {
-            leftW.brakeTorque = 0;
-            rightW.brakeTorque = 0;
-            if (rb.velocity.magnitude < maxVelocity)
-            {
-                leftW.motorTorque = verticalInput * maxMotorTorque;
-                rightW.motorTorque = verticalInput * maxMotorTorque;
-            }
-            else
-            {
-                leftW.motorTorque = 0;
-                rightW.motorTorque = 0;
-            }
+            Accelerate(leftW, rightW);
         }
-        else if (verticalInput < 0)
+        else if (throttleInput < 0)
         {
-            Vector3 localVelocity = transform.InverseTransformDirection(rb.velocity);
-            if (localVelocity.z > 0)
-            {
-                leftW.motorTorque = 0;
-                rightW.motorTorque = 0;
-                leftW.brakeTorque = verticalInput * -maxBrakeTorque;
-                rightW.brakeTorque = verticalInput * -maxBrakeTorque;
-
-                if (rb.velocity.magnitude > maxVelocity * 0.05f)
-                {
-                    rb.AddForce(-transform.forward * brakeMod * 1000);
-                    boostCharge += boostChargeRate * Time.deltaTime;
-                }
-            }
-            else
-            {
-                leftW.brakeTorque = 0;
-                rightW.brakeTorque = 0;
-                if (rb.velocity.magnitude < maxReverseSpeed)
-                {
-                    leftW.motorTorque = -maxMotorTorque;
-                    rightW.motorTorque = -maxMotorTorque;
-                }
-                else
-                {
-                    leftW.motorTorque = 0;
-                    rightW.motorTorque = 0;
-                }
-            }
+            Brake(leftW, rightW);  
         }
         else
         {
@@ -160,7 +130,56 @@ public class CarController : MonoBehaviour
         }
     }
 
-    private void Boost()
+    public void Accelerate(WheelCollider leftW, WheelCollider rightW)
+    {
+        leftW.brakeTorque = 0;
+        rightW.brakeTorque = 0;
+        if (rb.velocity.magnitude < maxVelocity)
+        {
+            leftW.motorTorque = throttleInput * maxMotorTorque;
+            rightW.motorTorque = throttleInput * maxMotorTorque;
+        }
+        else
+        {
+            leftW.motorTorque = 0;
+            rightW.motorTorque = 0;
+        }
+    }
+
+    public void Brake(WheelCollider leftW, WheelCollider rightW)
+    {
+        Vector3 localVelocity = transform.InverseTransformDirection(rb.velocity);
+        if (localVelocity.z > 0)
+        {
+            leftW.motorTorque = 0;
+            rightW.motorTorque = 0;
+            leftW.brakeTorque = throttleInput * -maxBrakeTorque;
+            rightW.brakeTorque = throttleInput * -maxBrakeTorque;
+
+            if (rb.velocity.magnitude > maxVelocity * 0.05f)
+            {
+                rb.AddForce(-transform.forward * brakeMod * 1000);
+                boostCharge += boostChargeRate * Time.deltaTime;
+            }
+        }
+        else
+        {
+            leftW.brakeTorque = 0;
+            rightW.brakeTorque = 0;
+            if (rb.velocity.magnitude < maxReverseSpeed)
+            {
+                leftW.motorTorque = -maxMotorTorque;
+                rightW.motorTorque = -maxMotorTorque;
+            }
+            else
+            {
+                leftW.motorTorque = 0;
+                rightW.motorTorque = 0;
+            }
+        }
+    }
+
+    public void Boost()
     {
         if (boostInput && boostCharge > 0)
         {
@@ -230,12 +249,21 @@ public class CarController : MonoBehaviour
         return travelDist;
     }
 
+    private void ApplyDownwardForce()
+    {
+        rb.AddForce(-transform.up * downwardForce);
+    }
+
     private void FixedUpdate()
     {
-        GetInput();
-        Steer();
-        Accelerate(rearWheelDrive);
-        Boost();
+        ApplyDownwardForce();
+        if (!AIEnabled)
+        {
+            GetInput();
+            Steer();
+            Move(rearWheelDrive);
+            Boost();
+        }
         SteeringHelper();
         StabilizeWheels();
         UpdateWheelPoses();
