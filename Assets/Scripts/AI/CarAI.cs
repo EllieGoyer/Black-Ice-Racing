@@ -12,7 +12,10 @@ public class CarAI : MonoBehaviour
     private bool finishedBraking = false;
 
     private List<Transform> nodes;
+    private List<int> sharpTurns;
     private int currentNode = 0;
+    private int currentTurn = 0;
+    private int turnsPassed = 0;
 
     private Rigidbody rb;
 
@@ -20,6 +23,8 @@ public class CarAI : MonoBehaviour
     {
         nodes = path.nodes;
         rb = GetComponent<Rigidbody>();
+        sharpTurns = GetSharpTurns();
+        currentTurn = sharpTurns[0];
     }
 
     private void FixedUpdate()
@@ -44,7 +49,7 @@ public class CarAI : MonoBehaviour
     {
         if (!isBraking)
         {
-            controller.verticalInput = 1;
+            controller.throttleInput = 1;
             controller.Accelerate(controller.backLeftW, controller.backRightW);
         }
     }
@@ -53,6 +58,15 @@ public class CarAI : MonoBehaviour
     {
         if (Vector3.Distance(transform.position, nodes[currentNode].position) < 5f)
         {
+            if (currentNode == currentTurn)
+            {
+                turnsPassed++;
+                if (turnsPassed >= sharpTurns.Count)
+                {
+                    turnsPassed = 0;
+                }
+                currentTurn = sharpTurns[turnsPassed];
+            }
             if (currentNode == nodes.Count - 1)
             {
                 currentNode = 0;
@@ -67,6 +81,7 @@ public class CarAI : MonoBehaviour
 
     private void ManageBraking()
     {
+        /*
         float angle1;
         float angle2;
         if (currentNode == 0)
@@ -80,8 +95,19 @@ public class CarAI : MonoBehaviour
 
         angle2 = GetNodeAngle(currentNode);
 
-        if (((angle1 >= 45 && rb.velocity.magnitude >= controller.maxVelocity / 2) || (angle2 >= 45 && rb.velocity.magnitude > controller.maxVelocity)) 
+        if (((angle1 >= 15 && rb.velocity.magnitude >= 50) || (angle2 >= 15 && rb.velocity.magnitude > 50)) 
             && !finishedBraking)
+        {
+            isBraking = true;
+        }
+        else
+        {
+            finishedBraking = true;
+            isBraking = false;
+        }
+        */
+
+        if (Vector3.Distance(transform.position, nodes[currentTurn].position) < 70 && rb.velocity.magnitude > 30 && !finishedBraking)
         {
             isBraking = true;
         }
@@ -96,7 +122,7 @@ public class CarAI : MonoBehaviour
     {
         if (isBraking)
         {
-            controller.verticalInput = -1;
+            controller.throttleInput = -1;
             controller.Brake(controller.backLeftW, controller.backRightW);
         }
         else
@@ -158,5 +184,21 @@ public class CarAI : MonoBehaviour
         }
 
         return Vector3.Angle(a, b);
+    }
+
+    private List<int> GetSharpTurns()
+    {
+        List<int> turns = new List<int>();
+
+        for (int i = 1; i < nodes.Count; i++)
+        {
+            var angle = GetNodeAngle(i);
+            if (angle > 10)
+            {
+                turns.Add(i);
+            }
+        }
+
+        return turns;
     }
 }

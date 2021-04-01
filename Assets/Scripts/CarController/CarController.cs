@@ -12,7 +12,7 @@ public class CarController : MonoBehaviour
     [HideInInspector] public float boostCharge = 0;
     
     private float horizontalInput;
-    [HideInInspector] public float verticalInput;
+    [HideInInspector] public float throttleInput;
     [HideInInspector] public bool boostInput;
     private float steeringAngle;
 
@@ -27,6 +27,8 @@ public class CarController : MonoBehaviour
     public CarTire tire;
     public CarAero aero;
 
+    [Header("Downward Force Modifier")]
+    public float downwardForce = 100f;
     [Header ("Handling")]
     [Range(30, 60)]
     public float maxSteerAngle = 30;
@@ -115,7 +117,7 @@ public class CarController : MonoBehaviour
         {
             Accelerate(leftW, rightW);
         }
-        else if (verticalInput < 0)
+        else if (throttleInput < 0)
         {
             Brake(leftW, rightW);  
         }
@@ -134,8 +136,8 @@ public class CarController : MonoBehaviour
         rightW.brakeTorque = 0;
         if (rb.velocity.magnitude < maxVelocity)
         {
-            leftW.motorTorque = verticalInput * maxMotorTorque;
-            rightW.motorTorque = verticalInput * maxMotorTorque;
+            leftW.motorTorque = throttleInput * maxMotorTorque;
+            rightW.motorTorque = throttleInput * maxMotorTorque;
         }
         else
         {
@@ -151,8 +153,8 @@ public class CarController : MonoBehaviour
         {
             leftW.motorTorque = 0;
             rightW.motorTorque = 0;
-            leftW.brakeTorque = verticalInput * -maxBrakeTorque;
-            rightW.brakeTorque = verticalInput * -maxBrakeTorque;
+            leftW.brakeTorque = throttleInput * -maxBrakeTorque;
+            rightW.brakeTorque = throttleInput * -maxBrakeTorque;
 
             if (rb.velocity.magnitude > maxVelocity * 0.05f)
             {
@@ -247,8 +249,14 @@ public class CarController : MonoBehaviour
         return travelDist;
     }
 
+    private void ApplyDownwardForce()
+    {
+        rb.AddForce(-transform.up * downwardForce);
+    }
+
     private void FixedUpdate()
     {
+        ApplyDownwardForce();
         if (!AIEnabled)
         {
             GetInput();
