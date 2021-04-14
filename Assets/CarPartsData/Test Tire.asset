@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Test Tire
   m_EditorClassIdentifier: 
   mass: 5
-  accelerationModifier: 20
-  handlingModifer: 5
-  brakingModifer: 2
+  accelerationModifier: 50
+  handlingModifer: 10
+  brakingModifer: 5
   model: {fileID: 0}

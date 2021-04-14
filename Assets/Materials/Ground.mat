@@ -75,21 +75,21 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _FlatRimEdgeSmoothness: 0.04
-    - _FlatRimLightAlign: 0
-    - _FlatRimSize: 0.313
+    - _FlatRimEdgeSmoothness: 0
+    - _FlatRimLightAlign: 0.3
+    - _FlatRimSize: 0.1
     - _FlatSpecularEdgeSmoothness: 0
     - _FlatSpecularSize: 0.1
-    - _Flatness: 0.401
+    - _Flatness: 1
     - _FlatnessExtra: 1
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _GradientAngle: 0
     - _GradientCenterX: 0
-    - _GradientCenterY: -31
+    - _GradientCenterY: 0
     - _GradientEnabled: 1
-    - _GradientSize: 143.17
+    - _GradientSize: 150
     - _LightContribution: 1
     - _LightmapDirectionPitch: 0
     - _LightmapDirectionYaw: 0
@@ -100,7 +100,7 @@ Material:
     - _Parallax: 0.02
     - _QueueOffset: 0
     - _RimEnabled: 1
-    - _SelfShadingSize: 0.626
+    - _SelfShadingSize: 0.659
     - _SelfShadingSizeExtra: 0.6
     - _ShadowEdgeSize: 0
     - _ShadowEdgeSizeExtra: 0.05

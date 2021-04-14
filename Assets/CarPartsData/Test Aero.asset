@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Test Aero
   m_EditorClassIdentifier: 
   mass: 5
-  topSpeedModifier: -5
+  topSpeedModifier: -50
   handlingModifier: 5
-  brakingModifier: 1
+  brakingModifier: 5
   model: {fileID: 0}
