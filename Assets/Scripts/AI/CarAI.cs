@@ -16,6 +16,7 @@ public class CarAI : MonoBehaviour
     private int currentNode = 0;
     private int currentTurn = 0;
     private int turnsPassed = 0;
+    private bool raceFinished = false;
 
     private Rigidbody rb;
 
@@ -29,18 +30,26 @@ public class CarAI : MonoBehaviour
 
     private void FixedUpdate()
     {
-        ApplySteer();
-        Drive();
-        CheckWaypointDistance();
-        ManageBraking();
-        Braking();
-        ManageBoosting();
+        if (!raceFinished)
+        {
+            ApplySteer();
+            Drive();
+            CheckWaypointDistance();
+            ManageBraking();
+            Braking();
+            ManageBoosting();
+        }
+        else
+        {
+            controller.backLeftW.motorTorque = 0;
+            controller.backRightW.motorTorque = 0;
+        }
     }
 
     private void ApplySteer()
     {
         Vector3 relativeVector = transform.InverseTransformPoint(nodes[currentNode].position);
-        float newSteer = (relativeVector.x / relativeVector.magnitude) * controller.maxSteerAngle;
+        float newSteer = (relativeVector.x / relativeVector.magnitude) * controller.maxSteerAngle * 1.5f;
         controller.frontRightW.steerAngle = newSteer;
         controller.frontLeftW.steerAngle = newSteer;
     }
@@ -56,26 +65,54 @@ public class CarAI : MonoBehaviour
 
     private void CheckWaypointDistance()
     {
-        if (Vector3.Distance(transform.position, nodes[currentNode].position) < 5f)
+        if (path.closedPath)
         {
-            if (currentNode == currentTurn)
+            if (Vector3.Distance(transform.position, nodes[currentNode].position) < 5f)
             {
-                turnsPassed++;
-                if (turnsPassed >= sharpTurns.Count)
+                if (currentNode == currentTurn)
                 {
-                    turnsPassed = 0;
+                    turnsPassed++;
+                    if (turnsPassed >= sharpTurns.Count)
+                    {
+                        turnsPassed = 0;
+                    }
+                    currentTurn = sharpTurns[turnsPassed];
                 }
-                currentTurn = sharpTurns[turnsPassed];
+                if (currentNode == nodes.Count - 1)
+                {
+                    currentNode = 0;
+                }
+                else
+                {
+                    currentNode++;
+                }
+                finishedBraking = false;
             }
-            if (currentNode == nodes.Count - 1)
+        }
+        else
+        {
+            if (Vector3.Distance(transform.position, nodes[currentNode].position) < 10f)
             {
-                currentNode = 0;
+                if (currentNode == currentTurn)
+                {
+                    turnsPassed++;
+                    if (turnsPassed >= sharpTurns.Count)
+                    {
+                        turnsPassed = 0;
+                    }
+                    currentTurn = sharpTurns[turnsPassed];
+                }
+                if (currentNode == nodes.Count - 1)
+                {
+                    raceFinished = true;
+                    Debug.Log("race finished");
+                }
+                else
+                {
+                    currentNode++;
+                }
+                finishedBraking = false;
             }
-            else
-            {
-                currentNode++;
-            }
-            finishedBraking = false;
         }
     }
 

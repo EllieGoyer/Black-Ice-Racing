@@ -5,6 +5,7 @@ using UnityEngine;
 public class AIPath : MonoBehaviour
 {
     public Color lineColor;
+    public bool closedPath = true;
 
     [HideInInspector]
     public List<Transform> nodes = new List<Transform>();
@@ -32,13 +33,14 @@ public class AIPath : MonoBehaviour
             if (i > 0)
             {
                 previousNode = nodes[i - 1].position;
+                Gizmos.DrawLine(previousNode, currentNode);
             }
-            else if (i == 0 && nodes.Count > 1)
+            else if (i == 0 && nodes.Count > 1 && closedPath)
             {
                 previousNode = nodes[nodes.Count - 1].position;
+                Gizmos.DrawLine(previousNode, currentNode);
             }
 
-            Gizmos.DrawLine(previousNode, currentNode);
             Gizmos.DrawWireSphere(currentNode, 0.3f);
         }
     }
