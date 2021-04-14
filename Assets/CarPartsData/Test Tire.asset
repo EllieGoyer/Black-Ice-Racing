@@ -16,4 +16,4 @@ MonoBehaviour:
   accelerationModifier: 50
   handlingModifer: 10
   brakingModifer: 5
-  model: {fileID: 0}
+  model: {fileID: 919132149155446097, guid: 5e7c36611bf656245bf84f8583eeea3f, type: 3}
