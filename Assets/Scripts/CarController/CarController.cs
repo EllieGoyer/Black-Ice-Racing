@@ -69,6 +69,28 @@ public class CarController : MonoBehaviour
         maxMotorTorque = body.accelerationBase + engine.accelerationModifier + tire.accelerationModifier;
         maxSteerAngle = body.handlingBase + engine.handlingModifer + tire.handlingModifer + aero.handlingModifier;
         brakeMod = body.brakingBase + engine.brakingModifer + tire.brakingModifer + aero.brakingModifier;
+        AssignTire(false, frontRightT, tire.model);
+        AssignTire(true, frontLeftT, tire.model);
+        AssignTire(false, backRightT, tire.model);
+        AssignTire(true, backLeftT, tire.model);
+    }
+
+    private void AssignTire(bool isLeft, Transform parent, GameObject tire)
+    {
+        if (isLeft)
+        {
+            AssignTire(parent, tire, 90);
+        }
+        else
+        {
+            AssignTire(parent, tire, -90);
+        }
+    }
+
+    private void AssignTire(Transform parent, GameObject tire, float angle)
+    {
+        GameObject newTire = Instantiate(tire, parent.position, parent.rotation, parent);
+        newTire.transform.Rotate(Vector3.up, angle);
     }
 
     public void GetInput()
@@ -198,8 +220,8 @@ public class CarController : MonoBehaviour
 
     private void UpdateWheelPose(WheelCollider collider, Transform transform)
     {
-        Vector3 pos = transform.position;
-        Quaternion quat = transform.rotation;
+        Vector3 pos;
+        Quaternion quat;
 
         collider.GetWorldPose(out pos, out quat);
 
@@ -254,9 +276,13 @@ public class CarController : MonoBehaviour
         rb.AddForce(-transform.up * downwardForce);
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         ApplyDownwardForce();
+    }
+
+    private void FixedUpdate()
+    {
         if (!AIEnabled)
         {
             GetInput();
