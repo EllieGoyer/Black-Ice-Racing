@@ -823,7 +823,7 @@ Transform:
   - {fileID: 498433822}
   - {fileID: 677312671}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &498433821
 GameObject:
@@ -974,13 +974,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 580544001}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: 0.10938167, y: 0.8754261, z: -0.40821788, w: 0.23456976}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 50, y: 150, z: 0}
 --- !u!1 &588989489
 GameObject:
   m_ObjectHideFlags: 0
@@ -1715,82 +1715,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1144921400}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &954046350
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 954046353}
-  - component: {fileID: 954046352}
-  - component: {fileID: 954046351}
-  m_Layer: 0
-  m_Name: Terrain
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
---- !u!154 &954046351
-TerrainCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 954046350}
-  m_Material: {fileID: 0}
-  m_Enabled: 1
-  m_TerrainData: {fileID: 15600000, guid: 4a266ba7d378a3c4492690331b32d936, type: 2}
-  m_EnableTreeColliders: 1
---- !u!218 &954046352
-Terrain:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 954046350}
-  m_Enabled: 1
-  serializedVersion: 6
-  m_TerrainData: {fileID: 15600000, guid: 4a266ba7d378a3c4492690331b32d936, type: 2}
-  m_TreeDistance: 5000
-  m_TreeBillboardDistance: 50
-  m_TreeCrossFadeLength: 5
-  m_TreeMaximumFullLODCount: 50
-  m_DetailObjectDistance: 80
-  m_DetailObjectDensity: 1
-  m_HeightmapPixelError: 5
-  m_SplatMapDistance: 1000
-  m_HeightmapMaximumLOD: 0
-  m_ShadowCastingMode: 2
-  m_DrawHeightmap: 1
-  m_DrawInstanced: 0
-  m_DrawTreesAndFoliage: 1
-  m_ReflectionProbeUsage: 1
-  m_MaterialTemplate: {fileID: 2100000, guid: 41fe0a30a5ec50f4e89f57dd2595ee7c, type: 2}
-  m_BakeLightProbesForTrees: 1
-  m_PreserveTreePrototypeLayers: 0
-  m_DeringLightProbesForTrees: 1
-  m_ScaleInLightmap: 0.0256
-  m_LightmapParameters: {fileID: 15203, guid: 0000000000000000f000000000000000, type: 0}
-  m_GroupingID: 0
-  m_RenderingLayerMask: 1
-  m_AllowAutoConnect: 1
---- !u!4 &954046353
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 954046350}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -950, y: -50, z: -550}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &955920227
 GameObject:
@@ -2558,7 +2482,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: bf9bc98dedb028c43b0736bed0fd28eb,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.3
+      value: -0.6
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bf9bc98dedb028c43b0736bed0fd28eb,
         type: 3}
@@ -2864,15 +2788,15 @@ WheelCollider:
   m_ForwardFriction:
     m_ExtremumSlip: 2
     m_ExtremumValue: 2
-    m_AsymptoteSlip: 0.8
+    m_AsymptoteSlip: 1
     m_AsymptoteValue: 1
-    m_Stiffness: 3
+    m_Stiffness: 2
   m_SidewaysFriction:
     m_ExtremumSlip: 1
     m_ExtremumValue: 2
-    m_AsymptoteSlip: 2
+    m_AsymptoteSlip: 3
     m_AsymptoteValue: 3
-    m_Stiffness: 4
+    m_Stiffness: 2
   m_Enabled: 1
 --- !u!1 &1254083533
 GameObject:
@@ -3754,15 +3678,15 @@ WheelCollider:
   m_ForwardFriction:
     m_ExtremumSlip: 2
     m_ExtremumValue: 2
-    m_AsymptoteSlip: 0.8
+    m_AsymptoteSlip: 1
     m_AsymptoteValue: 1
-    m_Stiffness: 3
+    m_Stiffness: 2
   m_SidewaysFriction:
     m_ExtremumSlip: 1
     m_ExtremumValue: 2
-    m_AsymptoteSlip: 2
+    m_AsymptoteSlip: 3
     m_AsymptoteValue: 3
-    m_Stiffness: 4
+    m_Stiffness: 2
   m_Enabled: 1
 --- !u!1 &1642728971
 GameObject:
@@ -4427,7 +4351,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1848346761}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.31, z: -0.208}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1698947423}

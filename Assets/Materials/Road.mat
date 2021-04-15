@@ -94,7 +94,7 @@ Material:
     - _GradientCenterY: 0
     - _GradientEnabled: 0
     - _GradientSize: 10
-    - _LightContribution: 1
+    - _LightContribution: 0
     - _LightFalloffSize: 0.0001
     - _LightmapDirectionPitch: 0
     - _LightmapDirectionYaw: 0
@@ -122,7 +122,7 @@ Material:
     - _UVSec: 0
     - _UnityShadowMode: 1
     - _UnityShadowPower: 0.333
-    - _UnityShadowSharpness: 1
+    - _UnityShadowSharpness: 10
     - _VertexColorsEnabled: 0
     - _ZWrite: 1
     m_Colors:

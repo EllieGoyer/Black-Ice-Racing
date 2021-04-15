@@ -9,7 +9,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: BluePaint
   m_Shader: {fileID: 4800000, guid: bee44b4a58655ee4cbff107302a3e131, type: 3}
-  m_ShaderKeywords: _CELPRIMARYMODE_SINGLE _TEXTUREBLENDINGMODE_MULTIPLY _UNITYSHADOWMODE_NONE
+  m_ShaderKeywords: DR_SPECULAR_ON _CELPRIMARYMODE_SINGLE _TEXTUREBLENDINGMODE_MULTIPLY
+    _UNITYSHADOWMODE_NONE
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -78,7 +79,7 @@ Material:
     - _FlatRimLightAlign: 0
     - _FlatRimSize: 0.253
     - _FlatSpecularEdgeSmoothness: 0
-    - _FlatSpecularSize: 0.775
+    - _FlatSpecularSize: 0.3
     - _Flatness: 1
     - _FlatnessExtra: 1
     - _GlossMapScale: 1
@@ -99,12 +100,12 @@ Material:
     - _Parallax: 0.02
     - _QueueOffset: 0
     - _RimEnabled: 0
-    - _SelfShadingSize: 0.618
+    - _SelfShadingSize: 0.6
     - _SelfShadingSizeExtra: 0.652
     - _ShadowEdgeSize: 0
     - _ShadowEdgeSizeExtra: 0
     - _SmoothnessTextureChannel: 0
-    - _SpecularEnabled: 0
+    - _SpecularEnabled: 1
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
@@ -113,7 +114,7 @@ Material:
     - _UVSec: 0
     - _UnityShadowMode: 0
     - _UnityShadowPower: 0.333
-    - _UnityShadowSharpness: 1
+    - _UnityShadowSharpness: 10
     - _VertexColorsEnabled: 0
     - _ZWrite: 1
     m_Colors:
