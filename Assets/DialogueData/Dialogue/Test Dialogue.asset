@@ -14,24 +14,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sentences:
   - character: {fileID: 11400000, guid: 2d05aea36f959a146973266cc56b6e54, type: 2}
-    text: Hi there.
+    text: Test introduction
     isChoice: 0
     choices: []
   - character: {fileID: 11400000, guid: 49d0566c140685a4fa53a74d683ce252, type: 2}
-    text: Hello. What's your name?
+    text: Test response (npc)
     isChoice: 0
     choices: []
   - character: {fileID: 11400000, guid: 2d05aea36f959a146973266cc56b6e54, type: 2}
-    text: I'm Sarah. What's your name?
+    text: Test reply option 1
     isChoice: 1
     choices:
-    - My name is Sarah. What's yours?
-    - I'm Sarah. What's your name?
+    - Test reply option 1
+    - Test reply option 2
   - character: {fileID: 11400000, guid: 49d0566c140685a4fa53a74d683ce252, type: 2}
-    text: I'm David. Nice to meet you.
+    text: Test response (npc)
     isChoice: 0
     choices: []
   - character: {fileID: 11400000, guid: 2d05aea36f959a146973266cc56b6e54, type: 2}
-    text: Nice to meet you too.
+    text: Test response (pc)
     isChoice: 0
     choices: []

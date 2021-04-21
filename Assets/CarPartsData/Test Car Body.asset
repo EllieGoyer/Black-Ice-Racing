@@ -15,6 +15,6 @@ MonoBehaviour:
   mass: 200
   topSpeedBase: 300
   accelerationBase: 200
-  handlingBase: 35
+  handlingBase: 25
   brakingBase: 15
   model: {fileID: 919132149155446097, guid: bf9bc98dedb028c43b0736bed0fd28eb, type: 3}
