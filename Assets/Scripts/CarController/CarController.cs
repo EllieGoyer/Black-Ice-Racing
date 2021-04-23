@@ -73,6 +73,9 @@ public class CarController : MonoBehaviour
         AssignTire(true, frontLeftT, tire.model);
         AssignTire(false, backRightT, tire.model);
         AssignTire(true, backLeftT, tire.model);
+        GameObject newBody = Instantiate(body.model, transform.GetChild(0));
+        newBody.transform.Rotate(Vector3.up, 90);
+        GameObject newEngine = Instantiate(engine.model, newBody.transform);
     }
 
     private void AssignTire(bool isLeft, Transform parent, GameObject tire)
