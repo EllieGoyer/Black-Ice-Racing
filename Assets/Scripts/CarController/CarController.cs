@@ -47,6 +47,8 @@ public class CarController : MonoBehaviour
     public float boostChargeRate = 5;
     [Header("Boost Drain Rate")]
     public float boostDrainRate = 5;
+    [Header("Maximum Boost Charge")]
+    public float maxBoost = 30;
 
     [Space]
     public bool rearWheelDrive = true;
@@ -184,7 +186,10 @@ public class CarController : MonoBehaviour
             if (rb.velocity.magnitude > maxVelocity * 0.05f)
             {
                 rb.AddForce(-transform.forward * brakeMod * 1000);
-                boostCharge += boostChargeRate * Time.deltaTime;
+                if (boostCharge < maxBoost)
+                {
+                    boostCharge += boostChargeRate * Time.deltaTime;
+                }
             }
         }
         else
