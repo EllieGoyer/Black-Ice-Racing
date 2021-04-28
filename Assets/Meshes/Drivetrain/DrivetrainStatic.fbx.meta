@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: bf9bc98dedb028c43b0736bed0fd28eb
+guid: 8af6bf1bc0a1c4541888f5db0a5c42bf
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
@@ -12,23 +12,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: rampShader2
-    second: {fileID: 2100000, guid: e4a7700a5680b654f84c113ab15b973d, type: 2}
+      name: rampShader6
+    second: {fileID: 2100000, guid: ec12a99068b444e4bb93d3777cd62ba6, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: rampShader3
-    second: {fileID: 2100000, guid: 3d4fe67bb00c857409de07c539db9b09, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: rampShader4
-    second: {fileID: 2100000, guid: 305f270e076712b458c3c285eb0015b1, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: rampShader5
-    second: {fileID: 2100000, guid: 02b94bf23d137d34baed7d4b113ba30d, type: 2}
+      name: rampShader7
+    second: {fileID: 2100000, guid: 5accb5e8040b2524383d953282ee366c, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

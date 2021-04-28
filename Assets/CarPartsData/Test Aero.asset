@@ -16,4 +16,4 @@ MonoBehaviour:
   topSpeedModifier: -50
   handlingModifier: 5
   brakingModifier: 2
-  model: {fileID: 0}
+  model: {fileID: 919132149155446097, guid: 45513aabb1d725549b6550c4497f8c00, type: 3}
