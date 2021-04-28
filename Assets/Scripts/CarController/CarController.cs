@@ -285,12 +285,10 @@ public class CarController : MonoBehaviour
         rb.AddForce(-transform.up * downwardForce);
     }
 
-    private void Update()
+    private void OnTriggerStay(Collider other)
     {
-        if (Physics.Raycast(transform.position, -transform.up, 5f, 8))
-        {
-            ApplyDownwardForce();
-        }
+        Debug.Log("Grounded");
+        ApplyDownwardForce();
     }
 
     private void FixedUpdate()
