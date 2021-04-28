@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -142,5 +143,10 @@ public class DialogueManager : MonoBehaviour
 
         //for testing
         OnReset?.Invoke();
+    }
+
+    public void LoadMainScene()
+    {
+        SceneManager.LoadScene(1);
     }
 }
