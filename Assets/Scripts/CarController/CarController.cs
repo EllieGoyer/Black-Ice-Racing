@@ -101,7 +101,8 @@ public class CarController : MonoBehaviour
     public void GetInput()
     {
         horizontalInput = Input.GetAxis("Horizontal");
-        throttleInput = Input.GetAxis("Throttle");
+        if(Input.GetAxis("TriggerThrottle") != 0){ throttleInput = Input.GetAxis("TriggerThrottle");} // Throttle uses triggers by default
+        else{ throttleInput = Input.GetAxis("KeyThrottle");} // But will use buttons if the triggers are unused
         boostInput = Input.GetButton("Boost");
     }
 
@@ -291,6 +292,8 @@ public class CarController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (boostCharge > 0 && throttleInput >= 0) { boostCharge = Mathf.Max(boostCharge - boostDrainRate * Time.deltaTime, 0); } //boost drains if unused (stacks with drain on use)
+
         if (!AIEnabled)
         {
             GetInput();

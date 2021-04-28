@@ -15,5 +15,5 @@ MonoBehaviour:
   mass: 5
   topSpeedModifier: -50
   handlingModifier: 5
-  brakingModifier: 5
+  brakingModifier: 2
   model: {fileID: 0}
