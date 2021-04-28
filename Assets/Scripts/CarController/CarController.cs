@@ -287,7 +287,10 @@ public class CarController : MonoBehaviour
 
     private void Update()
     {
-        ApplyDownwardForce();
+        if (Physics.Raycast(transform.position, -transform.up, 5f, 8))
+        {
+            ApplyDownwardForce();
+        }
     }
 
     private void FixedUpdate()
