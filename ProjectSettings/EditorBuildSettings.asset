@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/DialogueTest/DialogueTest.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
+    path: Assets/Scenes/CarCustomization/CarCustomization.unity
+    guid: 10695b01c5b00f84ba93b6b7cc14216f
+  - enabled: 1
     path: Assets/Scenes/CarControllerTest/CarControllerTest.unity
     guid: aa769bd45c637c3418d3a208403686e7
   m_configObjects:
