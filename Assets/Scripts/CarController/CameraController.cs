@@ -10,6 +10,8 @@ public class CameraController : MonoBehaviour
     public float lookOffset = 5;
     public float lookSpeed = 10;
 
+    public bool raceFinished = false;
+
     public void LookAtTarget()
     {
         Vector3 lookDirection = followTarget.position + followTarget.forward * lookOffset - transform.position;
@@ -28,7 +30,10 @@ public class CameraController : MonoBehaviour
 
     private void LateUpdate()
     {
-        LookAtTarget();
-        MoveToTarget();
+        if (!raceFinished)
+        {
+            LookAtTarget();
+            MoveToTarget();
+        }
     }
 }

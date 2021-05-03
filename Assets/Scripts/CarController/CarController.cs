@@ -17,6 +17,8 @@ public class CarController : MonoBehaviour
     private float steeringAngle;
 
     private bool AIEnabled = false;
+    private bool customizerCar = false;
+    private CarDataHolder dataHolder;
 
     public WheelCollider frontRightW, frontLeftW, backRightW, backLeftW;
     public Transform frontRightT, frontLeftT, backRightT, backLeftT;
@@ -61,6 +63,19 @@ public class CarController : MonoBehaviour
         {
             AIEnabled = true;
         }
+        CustomizerCar cc = GetComponent<CustomizerCar>();
+        if (cc != null)
+        {
+            customizerCar = true;
+        }
+        if (!AIEnabled)
+        {
+            dataHolder = FindObjectOfType<CarDataHolder>();
+            body = dataHolder.body;
+            engine = dataHolder.engine;
+            aero = dataHolder.aero;
+            tire = dataHolder.tire;
+        }
         Setup();
     }
 
@@ -78,6 +93,20 @@ public class CarController : MonoBehaviour
         GameObject newBody = Instantiate(body.model, transform.GetChild(0));
         newBody.transform.Rotate(Vector3.up, 90);
         GameObject newEngine = Instantiate(engine.model, newBody.transform);
+        GameObject newAero = Instantiate(aero.model, newBody.transform);
+        GameObject newDriveTrain = Instantiate(dataHolder.driveTrain, newBody.transform);
+        GameObject newDriveTrainSpinner = Instantiate(dataHolder.driveTrainSpinner, newBody.transform);
+        newDriveTrainSpinner.transform.localPosition += new Vector3(1.444f, 0.331f, 0);
+        
+    }
+
+    public void Clear()
+    {
+        Destroy(transform.GetChild(0).GetChild(0).gameObject);
+        Destroy(frontRightT.GetChild(0).gameObject);
+        Destroy(frontLeftT.GetChild(0).gameObject);
+        Destroy(backRightT.GetChild(0).gameObject);
+        Destroy(backLeftT.GetChild(0).gameObject);
     }
 
     private void AssignTire(bool isLeft, Transform parent, GameObject tire)
@@ -287,7 +316,6 @@ public class CarController : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        Debug.Log("Grounded");
         ApplyDownwardForce();
     }
 
@@ -295,7 +323,7 @@ public class CarController : MonoBehaviour
     {
         if (boostCharge > 0 && throttleInput >= 0) { boostCharge = Mathf.Max(boostCharge - boostDrainRate * Time.deltaTime, 0); } //boost drains if unused (stacks with drain on use)
 
-        if (!AIEnabled)
+        if (!AIEnabled && !customizerCar)
         {
             GetInput();
             Steer();

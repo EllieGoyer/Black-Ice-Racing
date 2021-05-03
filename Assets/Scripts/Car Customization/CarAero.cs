@@ -14,4 +14,7 @@ public class CarAero : ScriptableObject
 
     [Header("Model prefab")]
     public GameObject model;
+
+    [Header("Sprite")]
+    public Sprite sprite;
 }

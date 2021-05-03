@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Barbd
   m_EditorClassIdentifier: 
   characterName: Barbd
-  sprite: {fileID: 21300000, guid: 3c02c118a22c91e4f900031013ae7146, type: 3}
+  sprite: {fileID: 21300000, guid: 1423edb6417ce4243b99ab7fd4f7d6f3, type: 3}

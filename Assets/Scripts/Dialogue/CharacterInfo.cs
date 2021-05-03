@@ -7,4 +7,5 @@ public class CharacterInfo : ScriptableObject
 {
     public string characterName;
     public Sprite sprite;
+    public bool isLeftAligned;
 }
