@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Riptide3
   m_EditorClassIdentifier: 
   mass: 200
-  topSpeedBase: 0
-  accelerationBase: 0
-  handlingBase: 0
+  topSpeedBase: 500
+  accelerationBase: 400
+  handlingBase: 20
   brakingBase: 0
   model: {fileID: 919132149155446097, guid: fb096f7a2bb6ec046bf7ee2478731898, type: 3}
   sprite: {fileID: 21300000, guid: 72197b28ff2dd134da41f04b0f180ce6, type: 3}

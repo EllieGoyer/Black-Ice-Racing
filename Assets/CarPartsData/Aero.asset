@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Aero
   m_EditorClassIdentifier: 
   mass: 5
-  topSpeedModifier: 0
-  handlingModifier: 0
-  brakingModifier: 0
+  topSpeedModifier: -50
+  handlingModifier: 15
+  brakingModifier: 2
   model: {fileID: 919132149155446097, guid: 45513aabb1d725549b6550c4497f8c00, type: 3}
   sprite: {fileID: 21300000, guid: 43e69a27a7f13f84596cfdc8294aeef3, type: 3}

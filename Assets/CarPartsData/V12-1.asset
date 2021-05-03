@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: V12-1
   m_EditorClassIdentifier: 
   mass: 30
-  topSpeedModifier: 0
-  accelerationModifier: 0
-  handlingModifer: 0
-  brakingModifer: 0
+  topSpeedModifier: 200
+  accelerationModifier: 730
+  handlingModifer: -10
+  brakingModifer: -2
   model: {fileID: 919132149155446097, guid: a91a516a7a937a444aa277b27ca8362a, type: 3}
   sprite: {fileID: 21300000, guid: 80c829f34a51fbb4eb73193b00b25938, type: 3}

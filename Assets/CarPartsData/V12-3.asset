@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b85e69678c09b34980078c1cd30d3d7, type: 3}
   m_Name: V12-3
   m_EditorClassIdentifier: 
-  mass: 30
-  topSpeedModifier: 0
-  accelerationModifier: 0
+  mass: 10
+  topSpeedModifier: 100
+  accelerationModifier: 470
   handlingModifer: 0
   brakingModifer: 0
   model: {fileID: 919132149155446097, guid: 8db73802612a276429f3e2fdc4f36875, type: 3}
