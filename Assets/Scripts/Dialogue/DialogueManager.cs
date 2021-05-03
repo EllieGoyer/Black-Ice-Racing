@@ -11,11 +11,15 @@ public class DialogueManager : MonoBehaviour
     private static DialogueManager _instance;
     public static DialogueManager Instance { get => _instance; }
 
+    [Header("Dialogue Object")]
+    public DialogueInfo dialogue;
+
     [Header("UI Elements")]
     public GameObject dialogueUI;
     public TextMeshProUGUI dialogueText;
     public TextMeshProUGUI characterNameText;
-    public Image characterPortrait;
+    public Image rightCharacterPortrait;
+    public Image leftCharacterPortrait;
     public Button[] choiceButtons;
 
     private Queue<DialogueInfo.Sentence> _sentences;
@@ -49,6 +53,7 @@ public class DialogueManager : MonoBehaviour
     private void Start()
     {
         _sentences = new Queue<DialogueInfo.Sentence>();
+        StartDialogue(dialogue);
     }
 
     public void Update()
@@ -92,8 +97,23 @@ public class DialogueManager : MonoBehaviour
 
         _currentSentence = _sentences.Dequeue();
 
-        characterPortrait.sprite = _currentSentence.character.sprite;
         characterNameText.text = _currentSentence.character.characterName;
+        if (_currentSentence.character.isLeftAligned)
+        {
+            characterNameText.alignment = TextAlignmentOptions.TopLeft;
+            dialogueText.alignment = TextAlignmentOptions.TopLeft;
+            leftCharacterPortrait.sprite = _currentSentence.character.sprite;
+            leftCharacterPortrait.gameObject.SetActive(true);
+            rightCharacterPortrait.gameObject.SetActive(false);
+        }
+        else
+        {
+            characterNameText.alignment = TextAlignmentOptions.TopRight;
+            dialogueText.alignment = TextAlignmentOptions.TopRight;
+            rightCharacterPortrait.sprite = _currentSentence.character.sprite;
+            rightCharacterPortrait.gameObject.SetActive(true);
+            leftCharacterPortrait.gameObject.SetActive(false);
+        }
 
         if (_currentSentence.isChoice)
         {
