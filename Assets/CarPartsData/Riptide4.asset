@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb79382a1a4718a4789048bce3a5a3a9, type: 3}
   m_Name: Riptide4
   m_EditorClassIdentifier: 
-  mass: 200
+  mass: 170
   topSpeedBase: 200
   accelerationBase: 250
   handlingBase: 35

@@ -15,6 +15,6 @@ MonoBehaviour:
   mass: 5
   accelerationModifier: 50
   handlingModifer: 10
-  brakingModifer: 2
+  brakingModifer: 1
   model: {fileID: 8475648319900465627, guid: d5367e8ccc19cdf42bb24b9e9598652a, type: 3}
   sprite: {fileID: 21300000, guid: 0de7cf2e2a52ccc4ba33ec56dca84ca6, type: 3}

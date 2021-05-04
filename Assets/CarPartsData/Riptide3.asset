@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mass: 200
   topSpeedBase: 500
-  accelerationBase: 400
+  accelerationBase: 410
   handlingBase: 20
   brakingBase: 0
   model: {fileID: 919132149155446097, guid: fb096f7a2bb6ec046bf7ee2478731898, type: 3}
