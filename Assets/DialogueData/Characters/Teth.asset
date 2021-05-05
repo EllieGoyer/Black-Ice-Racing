@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Teth
   m_EditorClassIdentifier: 
   characterName: Teth
-  sprite: {fileID: 21300000, guid: 688805faa8fe1e347a03eab95197df75, type: 3}
+  sprite: {fileID: 21300000, guid: 320f1960de5ccc44a896894e87d5681b, type: 3}
   isLeftAligned: 1

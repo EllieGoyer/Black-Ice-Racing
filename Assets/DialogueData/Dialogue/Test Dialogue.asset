@@ -13,25 +13,54 @@ MonoBehaviour:
   m_Name: Test Dialogue
   m_EditorClassIdentifier: 
   sentences:
-  - character: {fileID: 11400000, guid: 2d05aea36f959a146973266cc56b6e54, type: 2}
-    text: Test introduction
+  - character: {fileID: 11400000, guid: 49d0566c140685a4fa53a74d683ce252, type: 2}
+    text: Boxes... boxes... where would I have put a head assembly for a V2 engine...
     isChoice: 0
     choices: []
   - character: {fileID: 11400000, guid: 49d0566c140685a4fa53a74d683ce252, type: 2}
-    text: Test response (npc)
+    text: Oh! Hey!
     isChoice: 0
     choices: []
-  - character: {fileID: 11400000, guid: 2d05aea36f959a146973266cc56b6e54, type: 2}
-    text: Test reply option 1
-    isChoice: 1
+  - character: {fileID: 11400000, guid: 49d0566c140685a4fa53a74d683ce252, type: 2}
+    text: You're that new kid who just showed up a couple hours ago, right?
+    isChoice: 0
     choices:
     - Test reply option 1
     - Test reply option 2
+  - character: {fileID: 11400000, guid: 2d05aea36f959a146973266cc56b6e54, type: 2}
+    text: Haha yeah!
+    isChoice: 1
+    choices:
+    - Haha yeah!
+    - ...
   - character: {fileID: 11400000, guid: 49d0566c140685a4fa53a74d683ce252, type: 2}
-    text: Test response (npc)
+    text: Okay okay cool! That probably means you're here to race, right?
     isChoice: 0
     choices: []
   - character: {fileID: 11400000, guid: 2d05aea36f959a146973266cc56b6e54, type: 2}
-    text: Test response (pc)
+    text: Absolutely not.
+    isChoice: 1
+    choices:
+    - Yeah!
+    - Absolutely not.
+  - character: {fileID: 11400000, guid: 49d0566c140685a4fa53a74d683ce252, type: 2}
+    text: Awesome! Let me get you a car printed and then Lapp can show you around
+      the track.
+    isChoice: 0
+    choices: []
+  - character: {fileID: 11400000, guid: 49d0566c140685a4fa53a74d683ce252, type: 2}
+    text: Hey Lapp! That sound okay?
+    isChoice: 0
+    choices: []
+  - character: {fileID: 11400000, guid: 1709d6fb755c63440b17c1de5d9f1b7c, type: 2}
+    text: Bringing them into the community with the sweet taste of defeat, huh?
+    isChoice: 0
+    choices: []
+  - character: {fileID: 11400000, guid: 1709d6fb755c63440b17c1de5d9f1b7c, type: 2}
+    text: Fine by me.
+    isChoice: 0
+    choices: []
+  - character: {fileID: 11400000, guid: 49d0566c140685a4fa53a74d683ce252, type: 2}
+    text: Awesome! Hey, what do you want your car like?
     isChoice: 0
     choices: []

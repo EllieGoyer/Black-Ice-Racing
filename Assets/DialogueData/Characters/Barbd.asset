@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Barbd
   m_EditorClassIdentifier: 
   characterName: Barbd
-  sprite: {fileID: 21300000, guid: 1423edb6417ce4243b99ab7fd4f7d6f3, type: 3}
+  sprite: {fileID: 21300000, guid: 03bc48a448acd7d4c89189e4f775ee3f, type: 3}
+  isLeftAligned: 0

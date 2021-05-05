@@ -16,5 +16,5 @@ MonoBehaviour:
   topSpeedModifier: 0
   handlingModifier: 0
   brakingModifier: 0
-  model: {fileID: 4975719558014773955, guid: 76c537bf212c8e84d849512557c516c5, type: 3}
+  model: {fileID: 768182975717918988, guid: 7477646ad65bbef469be73bd3f814ce9, type: 3}
   sprite: {fileID: 21300000, guid: bda235afd4109464d9eeecee99075b5f, type: 3}
