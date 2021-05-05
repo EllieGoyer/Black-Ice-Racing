@@ -13,6 +13,7 @@ public class CheckpointManager : MonoBehaviour
     public GameObject winBar;
     public GameObject lossBar;
     public GameObject playAgainButton;
+    public GameObject exitButton;
 
     public CameraController mainCamera;
 
@@ -48,6 +49,7 @@ public class CheckpointManager : MonoBehaviour
     {
         mainCamera.raceFinished = true;
         playAgainButton.SetActive(true);
+        exitButton.SetActive(true);
     }
 
     public void PlayAgain()
