@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -58,7 +59,7 @@ public class DialogueManager : MonoBehaviour
 
     public void Update()
     {
-        if (!_waitingForChoice && _isActive && Input.GetMouseButtonDown(0))
+        if (!_waitingForChoice && _isActive && (Input.GetMouseButtonDown(0) || Input.GetButtonDown("Boost")))
         {
             DisplayNextSentence();
         }
@@ -124,6 +125,7 @@ public class DialogueManager : MonoBehaviour
                 choiceButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = _currentSentence.choices[i];
                 choiceButtons[i].gameObject.SetActive(true);
             }
+            EventSystem.current.SetSelectedGameObject(choiceButtons[0].gameObject);
             _waitingForChoice = true;
             return;
         }

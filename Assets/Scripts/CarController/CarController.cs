@@ -31,6 +31,7 @@ public class CarController : MonoBehaviour
 
     [Header("Downward Force Modifier")]
     public float downwardForce = 100f;
+    private float defaultDownForce;
     [Header ("Handling")]
     [Range(30, 60)]
     public float maxSteerAngle = 30;
@@ -68,15 +69,17 @@ public class CarController : MonoBehaviour
         {
             customizerCar = true;
         }
+        dataHolder = FindObjectOfType<CarDataHolder>();
         if (!AIEnabled)
         {
-            dataHolder = FindObjectOfType<CarDataHolder>();
             body = dataHolder.body;
             engine = dataHolder.engine;
             aero = dataHolder.aero;
             tire = dataHolder.tire;
         }
         Setup();
+
+        defaultDownForce = downwardForce;
     }
 
     public void Setup()
@@ -316,7 +319,28 @@ public class CarController : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        ApplyDownwardForce();
+        if (other.gameObject.layer == 8)
+        {
+            ApplyDownwardForce();
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        CarController controller = collision.gameObject.GetComponent<CarController>();
+        if (controller != null)
+        {
+            downwardForce *= 100;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        CarController controller = collision.gameObject.GetComponent<CarController>();
+        if (controller != null)
+        {
+            downwardForce = defaultDownForce;
+        }
     }
 
     private void FixedUpdate()

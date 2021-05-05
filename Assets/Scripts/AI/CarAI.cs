@@ -17,6 +17,8 @@ public class CarAI : MonoBehaviour
     private int currentTurn = 0;
     private int turnsPassed = 0;
     private bool raceFinished = false;
+    private float timeStuck = 0;
+    private bool isStuck = false;
 
     private Rigidbody rb;
 
@@ -32,17 +34,23 @@ public class CarAI : MonoBehaviour
     {
         if (!raceFinished)
         {
-            ApplySteer();
-            Drive();
-            CheckWaypointDistance();
-            ManageBraking();
-            Braking();
-            ManageBoosting();
+            CheckIfStuck();
+            if (!isStuck)
+            {
+                ApplySteer();
+                Drive();
+                CheckWaypointDistance();
+                ManageBraking();
+                Braking();
+                ManageBoosting();
+            }
         }
         else
         {
             controller.backLeftW.motorTorque = 0;
             controller.backRightW.motorTorque = 0;
+            controller.backLeftW.brakeTorque = 9999;
+            controller.backRightW.brakeTorque = 9999;
         }
     }
 
@@ -237,5 +245,34 @@ public class CarAI : MonoBehaviour
         }
 
         return turns;
+    }
+
+    private void CheckIfStuck()
+    {
+        if (rb.velocity.magnitude < 1)
+        {
+            timeStuck += 1 * Time.deltaTime;
+            if (timeStuck > 2)
+            {
+                isStuck = true;
+                StartCoroutine(Reverse());
+            }
+        }
+        else
+        {
+            timeStuck = 0;
+        }
+    }
+
+    private IEnumerator Reverse()
+    {
+        controller.frontRightW.steerAngle = 0;
+        controller.frontLeftW.steerAngle = 0;
+        controller.backLeftW.motorTorque = -controller.maxMotorTorque;
+        controller.backRightW.motorTorque = -controller.maxMotorTorque;
+
+        yield return new WaitForSeconds(1);
+
+        isStuck = false;
     }
 }
